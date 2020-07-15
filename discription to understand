@@ -1,0 +1,59 @@
+Today I am showing you amazing magic with Computer Vision. I am sure most of you must have heard of Harry Potter’s Invisible Cloak. He wore the cloak to become invisible. Let’s make it a reality with python and OpenCV.
+
+Are you excited!
+
+Now, Let’s see how we can do it.
+
+
+ 
+
+The logic is very simple. We are extracting each frame of the video, with the help of segmentation. we separate the background and foreground of the image. We replace the foreground of a particular color with the background which gives the illusion of getting disappeared. I have taken red colored cloth for getting disappeared, you can use any color of your choice.
+
+
+Our workflow of this project will be:
+
+  
+
+1. Importing needed libraries and generate the output video
+
+2. Recording and caching the background for each frame.
+
+3. detecting the red portion in each frame
+
+4. Replacing the red portion with a mask image in each frame
+
+5. Producing the surprising output
+
+
+Step 1: Importing needed libraries and generate the output video 
+
+
+First of all, we will Import the libraries for the program. CV2 for computer vision operations, ‘time’ for time-related operations in the program, Numpy for numerical related computations. We are writing the video in fourcc and saving the output video
+
+Step 2: Recording and caching the background for each frame.
+
+
+We are replacing the red colored pixels with the background pixels to create the invisible effect in the video. For doing this, we have to store the background image for each frame.
+
+For capturing the current frame, we have used Cap.read() function and stored it in the variable named ‘background’. The variable ‘ret’ is used to store Boolean True/False, ret will give True value if the frame is read correctly otherwise it will give False. We are capturing the background in a for loop so that we have several frames for the background as averaging over multiple frames also reduces noise.
+
+
+Step 3: detecting the red portion In each frame
+
+
+In this step, we will put our focus on detecting the red part in the image. We will convert the RGB (red-blue-green) to HSV(hue-saturation-value) because RGB values are highly sensitive to illumination. After the conversion of RGB to HSV, it is time to specify the range of color to detect red color in the video.
+
+In Hue value, the red color is in range 0-30 as well as 150-180. To avoid the detection of skin as the red color we will use 0-10 and 170-180 range and combine both with the OR operator(+  in python)
+
+Step 4: Replacing the red portion with a mask image in each frame
+
+
+Now, we have a red part of the video in the ‘mask’ image, we will segment the mask part from the frames. We will do a morphology open and dilation for that.
+
+Step 5: Producing the surprising output
+
+
+The final step will be the replacement of the pixels of the detected red color region in the frames with the pixel values of the static background which was saved earlier 
+
+And Wingardium Leviosa!! 
+finally, we display the output which is an amazement to the eyes. 
